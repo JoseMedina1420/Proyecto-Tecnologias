@@ -1,0 +1,5 @@
+.App{
+    min-height: initial;
+    background: rgb(15,15,15);
+    background: linear-gradient(180deg, rgba(15,15,15,1) 23%, rgba(15,120,179,0.9977240896358543) 67%, rgba(5,87,179,1) 96%);
+}
