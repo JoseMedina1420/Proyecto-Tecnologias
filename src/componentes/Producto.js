@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import React from 'react';
-function Producto({id,Nombre,Descripcion,Tallas,Precio,imagen}) {
+function Producto({id,Nombre,Descripcion,Talla,Precio,Stock,imagen}) {
   return (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
     <Card style={{ width: '18rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
@@ -12,12 +12,13 @@ function Producto({id,Nombre,Descripcion,Tallas,Precio,imagen}) {
           {Descripcion}
         </Card.Text>
         <Card.Text className='text-center'>
-          {Tallas}
+          <p>Talla: {Talla}</p>
         </Card.Text>
         <Card.Footer className='text-center'>
-          {Precio}
+         <p> Precio: ${Precio}</p> 
+         <p> Stock: {Stock}</p>
         </Card.Footer>
-        <Button  variant="primary"  style={{ display: 'block', margin: '0 auto' }}>Ver producto</Button>
+        <Button  variant="primary"  style={{ display: 'block', margin: '0 auto' }}>Agregar al carrito</Button>
       </Card.Body>
     </Card>
     </div>
