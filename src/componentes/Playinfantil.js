@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import Producto from '../componentes/Producto';
 import Barranavegacion from '../componentes/Navegacion';
+import Carrito from './Carrito';
+
 
 function Playadulto() {
     const [productos, setProductos] = useState([]);
@@ -37,6 +39,7 @@ function Playadulto() {
     return (
         <div>
             <Barranavegacion />
+            <Carrito />
             <div className='container'>
                 <div className='row'>
                     {

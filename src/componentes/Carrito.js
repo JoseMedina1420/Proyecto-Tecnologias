@@ -7,6 +7,7 @@ import { MdRemoveShoppingCart, MdOutlineShoppingCartCheckout } from "react-icons
 function Carrito() {
   const [productosCarrito, setProductosCarrito] = useState([]);
 
+  // Obtener datos del carrito desde el servidor
   useEffect(() => {
     const fetchCarrito = async () => {
       try {
@@ -21,6 +22,7 @@ function Carrito() {
     fetchCarrito();
   }, []);
 
+  // Popover que muestra el contenido del carrito
   const popover = (
     <Popover id="popover-carrito" style={{ maxWidth: '300px' }}>
       <Popover.Header as="h3">Carrito</Popover.Header>
@@ -31,12 +33,14 @@ function Carrito() {
               <strong>{producto.nombre}</strong>
               <span>Descripción: {producto.descripcion}</span>
               <span>Precio: ${producto.precio}</span>
+              <span>Cantidad: {producto.cantidad}</span> {/* Muestra la cantidad */}
             </div>
           ))
         ) : (
           <span>El carrito está vacío</span>
         )}
       </Popover.Body>
+      {/* Botón para comprar el carrito */}
       {productosCarrito.length > 0 && (
         <div className="text-center p-2">
           <Button variant="primary" onClick={() => alert("Proceder a comprar carrito")}>
@@ -47,6 +51,7 @@ function Carrito() {
     </Popover>
   );
 
+  // Icono del carrito, cambia si está vacío o tiene productos
   return (
     <div className="d-flex justify-content-end">
       <OverlayTrigger trigger="click" placement="left" overlay={popover}>

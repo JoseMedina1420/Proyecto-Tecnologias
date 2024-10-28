@@ -1,16 +1,20 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
+import Form from 'react-bootstrap/Form';
 import React, { useState } from 'react';
 
 function Producto({ Id, Nombre, Descripcion, Tallas, Precio, Stock, imagen }) {
   const [alertMessage, setAlertMessage] = useState('');
-  const [alertVariant, setAlertVariant] = useState('success'); // Cambia el tipo de alerta según sea necesario
+  const [alertVariant, setAlertVariant] = useState('success');
   const [showAlert, setShowAlert] = useState(false);
+  const [cantidad, setCantidad] = useState(1); // Estado para la cantidad de productos
 
   const handleAgregarAlCarrito = async () => {
     console.log("ID del producto:", Id);
     console.log("Nombre del producto:", Nombre);
+    console.log("Cantidad del producto:", cantidad);
+    
     try {
       const response = await fetch('http://localhost/Conexion/agregar_carrito.php', {
         method: 'POST',
@@ -21,6 +25,8 @@ function Producto({ Id, Nombre, Descripcion, Tallas, Precio, Stock, imagen }) {
           id: Id,
           nombre: Nombre,
           descripcion: Descripcion,
+          precio: Precio,
+          cantidad: cantidad, // Incluye la cantidad
         }),
       });
   
@@ -44,7 +50,14 @@ function Producto({ Id, Nombre, Descripcion, Tallas, Precio, Stock, imagen }) {
       setShowAlert(true);
     }
   };
-  
+
+  // Función para manejar el cambio en la cantidad
+  const handleCantidadChange = (e) => {
+    const nuevaCantidad = parseInt(e.target.value, 10);
+    if (nuevaCantidad > 0 && nuevaCantidad <= Stock) {
+      setCantidad(nuevaCantidad);
+    }
+  };
 
   return (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
@@ -65,6 +78,17 @@ function Producto({ Id, Nombre, Descripcion, Tallas, Precio, Stock, imagen }) {
             <p> Precio: ${Precio}</p>
             <p> Stock: {Stock}</p>
           </Card.Footer>
+          <Form.Group className="text-center">
+            <Form.Label>Cantidad:</Form.Label>
+            <Form.Control 
+              type="number" 
+              value={cantidad} 
+              min="1" 
+              max={Stock} 
+              onChange={handleCantidadChange} 
+              style={{ width: '60px', margin: '0 auto' }}
+            />
+          </Form.Group>
           <Button variant="primary" style={{ display: 'block', margin: '0 auto' }} onClick={handleAgregarAlCarrito}>
             Agregar al carrito
           </Button>
