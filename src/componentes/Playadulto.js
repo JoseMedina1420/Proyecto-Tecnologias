@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import Producto from '../componentes/Producto';
 import Barranavegacion from '../componentes/Navegacion';
+import Carrito from './Carrito';
 
 function Playadulto() {
     const [productos, setProductos] = useState([]);
@@ -38,12 +39,14 @@ function Playadulto() {
     return (
         <div>
             <Barranavegacion />
+            <Carrito />
             <div className='container'>
                 <div className='row'>
                     {
                         productos.map(c => (
                             <div className='col-md-3' key={c.id}>
                                 <Producto
+                                    Id={c.id}
                                     Nombre={c.nombre}
                                     Descripcion={c.descripcion}
                                     Tallas={c.talla}

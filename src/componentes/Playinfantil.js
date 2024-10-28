@@ -43,6 +43,7 @@ function Playadulto() {
                         productos.map(c => (
                             <div className='col-md-3' key={c.id}>
                                 <Producto
+                                    Id={c.id}
                                     Nombre={c.nombre}
                                     Descripcion={c.descripcion}
                                     Tallas={c.talla}

@@ -38,6 +38,7 @@ function Productos() {
                     {productos.map((c, index) => (
                         <div className='col-md-3' key={`${c.id}-${index}`}>
                             <Producto
+                                Id={c.id}
                                 Nombre={c.nombre}
                                 Descripcion={c.descripcion}
                                 Tallas={c.talla}
